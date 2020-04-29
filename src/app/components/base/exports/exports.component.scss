@@ -1,0 +1,15 @@
+mat-card {
+    max-width: 30%;
+    mat-list-item {
+        border: solid 1px black;
+    }
+}
+
+.example-button-row {
+    display: table-cell;
+  }
+
+.example-button-row button {
+display: table-cell;
+margin-right: 8px;
+}

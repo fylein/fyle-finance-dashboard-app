@@ -1,0 +1,28 @@
+<mat-card>
+    <mat-card-title>Export status</mat-card-title>
+    <mat-list>
+        <mat-list-item>Status : {{logs.status}} </mat-list-item>
+        <mat-list-item>Action : <div class="example-button-row">
+            <button mat-raised-button color="warn" (click)= "exportSheet()">{{logs.action}}</button>
+        </div></mat-list-item>
+        <mat-list-item>Last Created : {{logs.updated_at}} </mat-list-item>
+    </mat-list>
+</mat-card>
+
+<mat-card>
+    <mat-card-title>Google sheet Detail</mat-card-title>
+    <mat-list>
+        <mat-list-item>Total orgs : {{logs.total_orgs}} </mat-list-item>
+        <mat-list-item>Total rows : {{logs.total_rows}} </mat-list-item>
+        <mat-list-item>Gsheet link : {{logs.gsheet_links}} </mat-list-item>
+        <mat-list-item>Shared with : {{logs.shared_with}} </mat-list-item>
+    </mat-list>
+</mat-card>
+
+<mat-card>
+    <mat-card-title>Google data studio resources</mat-card-title>
+    <mat-list>
+        <mat-list-item>Report templare link : </mat-list-item>
+        <mat-list-item>Help : </mat-list-item>
+    </mat-list>
+</mat-card>
