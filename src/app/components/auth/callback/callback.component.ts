@@ -11,30 +11,19 @@ export class CallbackComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute,
     private authService: AuthService) {
     if(this.authService.isLoggedIn()){
-      console.log("Loging")
-      router.navigate(['/workspaces']);
+      router.navigate(['/enterprise']);
     }
     this.route.queryParams.subscribe(params => {
       if (params.code) {
         this.authService.login(params.code).subscribe(
           response => {
             this.authService.setUser(response).subscribe(profile => {
-              this.authService.mapUser(profile).subscribe(
-                response => {
-                  profile.enterprise = response
-                  localStorage.setItem('user', JSON.stringify(profile));
-                  this.router.navigate(['/workspaces']);
-                },
-                error => {
-                  this.authService.logout()
-                  this.router.navigate(['auth/login']).then(function() {
-                    window.location.reload();
-                  });
-                }
-              )
+              localStorage.setItem('user', JSON.stringify(profile));
+              router.navigate(['/enterprise']);
             });
           },
           error => {
+            this.authService.logout();
             this.router.navigate(['auth/login']).then(function() {
               window.location.reload();
             });

@@ -77,8 +77,4 @@ export class AuthService {
   logout() {
     localStorage.clear();
   }
-
-  mapUser(profile) {
-    return this.generalService.post('/user/map_user/', profile)
-  }
 }
