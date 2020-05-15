@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FyleCallbackComponent } from './fyle-callback.component';
+import { ConnectionsComponent } from './connections.component';
 
-describe('FyleCallbackComponent', () => {
-  let component: FyleCallbackComponent;
-  let fixture: ComponentFixture<FyleCallbackComponent>;
+describe('ConnectionsComponent', () => {
+  let component: ConnectionsComponent;
+  let fixture: ComponentFixture<ConnectionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FyleCallbackComponent ]
+      declarations: [ ConnectionsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FyleCallbackComponent);
+    fixture = TestBed.createComponent(ConnectionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
