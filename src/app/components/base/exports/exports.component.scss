@@ -1,0 +1,37 @@
+body {
+    font: 14px aktiv-grotesk,sans-serif;
+}
+
+.btn-default {
+    font-family: Raleway-SemiBold;
+    font-size: 13px;
+    color: #f36;
+    letter-spacing: 1px;
+    line-height: 15px;
+    border: 2px solid #f36;
+    border-radius: 4px;
+    background: transparent;
+    transition: all 0.3s ease 0s;
+}
+
+.table {
+    max-width: 50%;
+
+    .table-borderless th {
+        border-bottom: none;
+    }
+
+    .btn:hover {
+        background-color: #ccc;
+    }
+
+    .spinner-grow {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+.btn-default:hover {
+    background-color: #f36;
+    color: #f2f2f2;   
+}

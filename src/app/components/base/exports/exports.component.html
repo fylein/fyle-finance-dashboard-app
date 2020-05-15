@@ -1,0 +1,56 @@
+<table class="table">
+  <thead class="table-borderless">
+    <th> Export status</th>
+  </thead>
+  <tbody class="table-bordered">
+    <tr class="pl-2">
+      <td>Status</td>
+      <td>
+        {{logs.status}}
+        <div *ngIf="isSyncing" class="spinner-grow text-danger" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </td>
+    </tr>
+    <tr class="pl-2" *ngIf='logs.updated_at'>
+      <td>Last Synced at</td>
+      <td>{{formatDate(logs.updated_at)}}</td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-default ml-3" (click)= "exportSheet()">{{logs.action}}</button>
+
+<table class="table">
+  <thead class="table-borderless">
+    <th> Google sheet Detail</th>
+  </thead>
+  <tbody class="table-bordered">
+    <tr class="pl-2">
+      <td>Total orgs</td>
+      <td>{{logs.total_orgs}}</td>
+    </tr>
+    <tr class="pl-2">
+      <td>Total rows</td>
+      <td>{{logs.total_rows}}</td>
+    </tr>
+  </tbody>
+</table>
+<a *ngIf='logs.gsheet_link' class="btn btn-primary btn-default ml-3" href="{{gsheet_link}}{{logs.gsheet_link}}" target="_blank" role="button">Open Google sheet</a>
+
+<table class="table">
+  <thead class="table-borderless">
+    <th> Google data studio resources</th>
+  </thead>
+  <tbody class="table-bordered">
+    <tr class="pl-2">
+      <td>Report templare link</td>
+      <td><a class="btn" href="{{report_link}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
+    </tr>
+    <tr class="pl-2">
+      <td>Help</td>
+      <td><a class="btn" href="{{help_link}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
+    </tr>
+  </tbody>
+</table>
+  
+  
