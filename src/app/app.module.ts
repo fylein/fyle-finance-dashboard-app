@@ -19,7 +19,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { FyleCallbackComponent } from './components/base/fyle-callback/fyle-callback.component';
 import { JwtInterceptor } from './components/auth/jwt.interceptor';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
 import { CdkColumnDef } from '@angular/cdk/table';
+import { PromptModelComponent } from './components/general/prompt-model/prompt-model.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { CdkColumnDef } from '@angular/cdk/table';
     ConnectionsComponent,
     ExportsComponent,
     FyleCallbackComponent,
+    PromptModelComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { CdkColumnDef } from '@angular/cdk/table';
     MatListModule,
     MatCardModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

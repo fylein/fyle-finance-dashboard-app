@@ -11,6 +11,8 @@ import { AuthGuard } from './components/auth/auth.guard'
 import { ConnectionsComponent } from './components/base/connections/connections.component';
 import { ExportsComponent } from './components/base/exports/exports.component';
 import { FyleCallbackComponent } from './components/base/fyle-callback/fyle-callback.component';
+import { PromptModelComponent } from './components/general/prompt-model/prompt-model.component';
+
 const authRoutes: Routes = [
   {
     path: 'auth',
@@ -32,7 +34,7 @@ const authRoutes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'enterprise',
+    redirectTo: 'enterprise/',
     pathMatch: 'full'
   },
 ];
@@ -43,7 +45,7 @@ const baseModuleRoutes: Routes = [
     component: BaseComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: ConnectionsComponent },
+      { path: 'connections', component: ConnectionsComponent },
       { path: 'exports', component: ExportsComponent },
     ]
   },
@@ -51,6 +53,10 @@ const baseModuleRoutes: Routes = [
     path: 'fyle/callback', 
     canActivate: [AuthGuard],
     component: FyleCallbackComponent 
+  },
+  { path: 'error', 
+    canActivate: [AuthGuard],
+    component: PromptModelComponent
   }
 ]
 
