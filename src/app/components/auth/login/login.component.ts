@@ -15,7 +15,7 @@ const CALLBACK_URI = environment.callback_uri;
 export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
     if(this.authService.isLoggedIn()){
-      router.navigate(['/enterprise']);
+      router.navigate(['/enterprise/connections/']);
     }
   }
 

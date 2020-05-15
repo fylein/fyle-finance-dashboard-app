@@ -11,7 +11,7 @@ export class CallbackComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute,
     private authService: AuthService) {
     if(this.authService.isLoggedIn()){
-      router.navigate(['/enterprise']);
+      router.navigate(['/enterprise/connections/']);
     }
     this.route.queryParams.subscribe(params => {
       if (params.code) {
@@ -19,7 +19,7 @@ export class CallbackComponent implements OnInit {
           response => {
             this.authService.setUser(response).subscribe(profile => {
               localStorage.setItem('user', JSON.stringify(profile));
-              router.navigate(['/enterprise']);
+              router.navigate(['/enterprise/connections/']);
             });
           },
           error => {
