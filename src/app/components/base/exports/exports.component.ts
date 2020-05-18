@@ -7,8 +7,8 @@ const GSHEET_LINK = environment.gsheet_link;
 const REPORT_LINK = environment.report_link;
 const HELP_LINK = environment.help_link;
 const DEFAULT_SYNC_NOW = "Sync now";
-const DEFAULT_SYNC_PROGRESS = "Sync is in progress";
-const DEFAULT_SYNC_COMPLETE = "Sync Completed";
+const DEFAULT_SYNC_PROGRESS = "In progress";
+const DEFAULT_SYNC_COMPLETE = "Completed";
 const DEFAULT_SYNC_EXPORT = "Export";
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "June",
 "July", "Aug", "Sept", "Oct", "Nov", "Dec"
@@ -26,21 +26,25 @@ export class ExportsComponent implements OnInit {
   report_link = REPORT_LINK;
   help_link = HELP_LINK;
   isSyncing: boolean = false;
+  disableStatus: boolean = false;
 
   constructor(private enterpriseService: EnterpriseService, private router: Router) {
   }
 
   ngOnInit() {
-      this.getExportSheet();
+    this.getExportSheet();
   }
 
   formatDate(date) {
     var newDate = new Date(date);
+    // var timezoneOffset = newDate.getTimezoneOffset();
+    // var newDate = new Date(newDate.getTime()+timezoneOffset*60*1000);
     var month = MONTHS[newDate.getMonth()];
     var day = newDate.getDate();
     var year = newDate.getFullYear();
-
-    return month+" "+day+", "+year;
+    var hours = newDate.getHours();
+    var minutes = newDate.getMinutes();
+    return month+" "+day+", "+year+" "+hours+":"+minutes;
   }
 
   getExportSheet() {
@@ -51,6 +55,8 @@ export class ExportsComponent implements OnInit {
       this.logs.action = DEFAULT_SYNC_NOW;
       if (this.logs.status != DEFAULT_SYNC_COMPLETE) {
         this.isSyncing = true;
+        this.disableStatus = true;
+        this.logs.action = "Syncing";
       }
     },
     error => {
@@ -71,6 +77,8 @@ export class ExportsComponent implements OnInit {
   exportSheet() {
     this.logs.status = DEFAULT_SYNC_PROGRESS;
     this.isSyncing = true;
+    this.disableStatus =true;
+    this.logs.action = "Syncing";
     var result = this.enterpriseService.postExportLogs(this.user.enterprise.id).subscribe(logs => {
       this.getExportSheet();
     },
