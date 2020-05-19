@@ -13,7 +13,7 @@
             <td>{{org.org_name}}</td>
             <td *ngIf="org.refresh_token">{{org.added_by}}</td>
             <td *ngIf="org.refresh_token">Connected</td>
-            <td *ngIf="!org.refresh_token">Not yet added</td>
+            <td *ngIf="!org.refresh_token">Not connected</td>
             <td *ngIf="!org.refresh_token">
                 <button type="button" class="btn btn-danger float-left" (click)="connectFyle()">Connect</button>
             </td>
