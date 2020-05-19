@@ -15,6 +15,11 @@ import { PromptModelComponent } from './components/general/prompt-model/prompt-m
 
 const authRoutes: Routes = [
   {
+    path: '',
+    redirectTo: '/enterprise',
+    pathMatch: 'full'
+  },
+  {
     path: 'auth',
     component: AuthComponent,
     children: [
