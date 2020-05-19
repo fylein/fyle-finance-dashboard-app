@@ -1,0 +1,13 @@
+.list-view{
+    display: block;
+    list-style: none;
+    text-align: left;
+}
+
+.list-view li{
+    display: inline-block;
+}
+
+.list-view li:last-child{
+    float: right;
+}
