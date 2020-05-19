@@ -23,7 +23,7 @@ export class BaseComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(this.user));
         this.isLoading = false;
         if (pathName === '/enterprise') {
-          this.router.navigate(['/enterprise/connections/']);
+          this.router.navigate(['/enterprise/exports/']);
         }
       },
       error => {
