@@ -8,7 +8,6 @@ const REPORT_LINK = environment.report_link;
 const HELP_LINK = environment.help_link;
 const DEFAULT_SYNC_NOW = "Sync now";
 const DEFAULT_SYNC_PROGRESS = "In progress";
-const DEFAULT_SYNC_COMPLETE = "Completed";
 const DEFAULT_SYNC_EXPORT = "Export";
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "June",
 "July", "Aug", "Sept", "Oct", "Nov", "Dec"
@@ -26,7 +25,7 @@ export class ExportsComponent implements OnInit {
   reportLink = REPORT_LINK;
   helpLink = HELP_LINK;
   isSyncing: boolean = false;
-  disableStatus: boolean = false;
+  disableStatus: boolean = true;
 
   constructor(private enterpriseService: EnterpriseService, private router: Router) {
   }
@@ -52,7 +51,7 @@ export class ExportsComponent implements OnInit {
     if (minutes/10 < 1) {
       minutes= `0${minutes}`
     }
-    
+
     return `${month} ${day}, ${year} ${hours}:${minutes}`;
   }
 
@@ -61,8 +60,9 @@ export class ExportsComponent implements OnInit {
       this.isLoading = false;
       this.isSyncing = false;
       this.logs = logs;
+      this.disableStatus = false;
       this.logs.action = DEFAULT_SYNC_NOW;
-      if (this.logs.status != DEFAULT_SYNC_COMPLETE) {
+      if (this.logs.status == DEFAULT_SYNC_PROGRESS) {
         this.isSyncing = true;
         this.disableStatus = true;
         this.logs.action = "Syncing";

@@ -27,7 +27,7 @@
   </tbody>
 </table>
 <button type="button" class="btn btn-default btn-danger-color ml-3" (click)= "exportSheet()" [disabled]="disableStatus">{{logs.action}}</button>
-<a *ngIf='logs.gsheet_link' class="btn btn-default ml-3" href="{{gsheetLink}}{{logs.gsheetLink}}" target="_blank" role="button">Open in google sheets</a>
+<a *ngIf='logs.gsheet_link' class="btn btn-default ml-3" href="{{gsheetLink}}{{logs.gsheet_link}}" target="_blank" role="button">Open in google sheets</a>
 <hr>
 <table class="table">
   <thead class="table-borderless">
