@@ -22,9 +22,9 @@ export class ExportsComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
   logs: any = {};
   isLoading: boolean = true;
-  gsheet_link = GSHEET_LINK;
-  report_link = REPORT_LINK;
-  help_link = HELP_LINK;
+  gsheetLink = GSHEET_LINK;
+  reportLink = REPORT_LINK;
+  helpLink = HELP_LINK;
   isSyncing: boolean = false;
   disableStatus: boolean = false;
 
@@ -37,14 +37,23 @@ export class ExportsComponent implements OnInit {
 
   formatDate(date) {
     var newDate = new Date(date);
-    // var timezoneOffset = newDate.getTimezoneOffset();
-    // var newDate = new Date(newDate.getTime()+timezoneOffset*60*1000);
     var month = MONTHS[newDate.getMonth()];
-    var day = newDate.getDate();
+    var day: any = newDate.getDate();
     var year = newDate.getFullYear();
-    var hours = newDate.getHours();
-    var minutes = newDate.getMinutes();
-    return month+" "+day+", "+year+" "+hours+":"+minutes;
+    var hours: any = newDate.getHours();
+    var minutes: any = newDate.getMinutes();
+
+    if (day/10 < 1) {
+      day = `0${day}`
+    }
+    if (hours/10 < 1) {
+      hours = `0${hours}`
+    }
+    if (minutes/10 < 1) {
+      minutes= `0${minutes}`
+    }
+    
+    return `${month} ${day}, ${year} ${hours}:${minutes}`;
   }
 
   getExportSheet() {

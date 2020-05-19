@@ -13,7 +13,7 @@
       </td>
     </tr>
     <tr class="pl-2" *ngIf='logs.updated_at'>
-      <td>Last Synced at</td>
+      <td>Last synced at</td>
       <td>{{formatDate(logs.updated_at)}}</td>
     </tr>
     <tr class="pl-2">
@@ -27,7 +27,7 @@
   </tbody>
 </table>
 <button type="button" class="btn btn-default btn-danger-color ml-3" (click)= "exportSheet()" [disabled]="disableStatus">{{logs.action}}</button>
-<a *ngIf='logs.gsheet_link' class="btn btn-default ml-3" href="{{gsheet_link}}{{logs.gsheet_link}}" target="_blank" role="button">Open in google sheet</a>
+<a *ngIf='logs.gsheet_link' class="btn btn-default ml-3" href="{{gsheetLink}}{{logs.gsheetLink}}" target="_blank" role="button">Open in google sheets</a>
 <hr>
 <table class="table">
   <thead class="table-borderless">
@@ -36,11 +36,11 @@
   <tbody class="table-bordered">
     <tr class="pl-2">
       <td>Google data studio report template</td>
-      <td><a class="btn" href="{{report_link}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
+      <td><a class="btn" href="{{reportLink}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
     </tr>
     <tr class="pl-2">
       <td>Help</td>
-      <td><a class="btn" href="{{help_link}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
+      <td><a class="btn" href="{{helpLink}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
     </tr>
   </tbody>
 </table>
