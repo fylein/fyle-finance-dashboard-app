@@ -4,7 +4,7 @@
 export const environment = {
   production: false,
   fyle_url: 'https://accounts.staging.fyle.in',
-  fyle_client_id: 'tpa0c7DYcvGAo',
+  fyle_client_id: '<client-id>',
   callback_uri: 'http://localhost:4200/auth/callback',
   api_url: 'http://localhost:8000/api',
   app_url: 'http://localhost:4200',
