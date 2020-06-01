@@ -1,0 +1,24 @@
+<div class="sub-navbar-heading">
+    <h1 class="navbar-brand pl-2">Entities</h1>
+</div>
+<div class="content pl-2 pr-2 mt-2">
+    <table class="table">
+        <thead class="thead-light">
+            <th> Organization name</th>
+            <th> Added by</th>
+            <th> Status</th>
+        </thead>
+        <tbody>
+        <tr *ngFor= "let org of orgs">
+            <td>{{org.org_name}}</td>
+            <td *ngIf="org.refresh_token">{{org.added_by}}</td>
+            <td *ngIf="org.refresh_token">Connected</td>
+            <td *ngIf="!org.refresh_token">Not connected</td>
+            <td *ngIf="!org.refresh_token">
+                <button type="button" class="btn btn-danger float-left" (click)="connectFyle()">Connect</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
