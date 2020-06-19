@@ -4,11 +4,11 @@
 export const environment = {
   production: false,
   fyle_url: 'https://accounts.staging.fyle.in',
-  fyle_client_id: '<client-id>',
+  fyle_client_id: 'tpaJu0szH4vnk',
   callback_uri: 'http://localhost:4200/auth/callback',
-  api_url: 'http://localhost:8000/api',
+  api_url: 'https://api-multi-org-dashboard.fyleappz.com/api',
   app_url: 'http://localhost:4200',
-  gsheet_link: 'https://docs.google.com/spreadsheets/d/',
+  google_sheets_link: 'https://docs.google.com/spreadsheets/d/',
   report_link: '#',
   help_link: '#'
 }

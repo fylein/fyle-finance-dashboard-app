@@ -1,48 +1,48 @@
-<table class="table">
-  <thead class="table-borderless">
-    <th> Export status</th>
-  </thead>
-  <tbody class="table-bordered">
-    <tr class="pl-2">
-      <td>Status</td>
-      <td>
-        {{logs.status}}
-        <div *ngIf="isSyncing" class="spinner-grow text-danger" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </td>
-    </tr>
-    <tr class="pl-2" *ngIf='logs.updated_at'>
-      <td>Last synced at</td>
-      <td>{{formatDate(logs.updated_at)}}</td>
-    </tr>
-    <tr class="pl-2">
-      <td>Total orgs</td>
-      <td>{{logs.total_orgs}}</td>
-    </tr>
-    <tr class="pl-2">
-      <td>Total rows</td>
-      <td>{{logs.total_rows}}</td>
-    </tr>
-  </tbody>
-</table>
-<button type="button" class="btn btn-default btn-danger-color ml-3" (click)= "exportSheet()" [disabled]="disableStatus">{{logs.action}}</button>
-<a *ngIf='logs.gsheet_link' class="btn btn-default ml-3" href="{{gsheetLink}}{{logs.gsheet_link}}" target="_blank" role="button">Open in google sheets</a>
-<hr>
-<table class="table">
-  <thead class="table-borderless">
-    <th> Google data studio resources</th>
-  </thead>
-  <tbody class="table-bordered">
-    <tr class="pl-2">
-      <td>Google data studio report template</td>
-      <td><a class="btn" href="{{reportLink}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
-    </tr>
-    <tr class="pl-2">
-      <td>Help</td>
-      <td><a class="btn" href="{{helpLink}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
-    </tr>
-  </tbody>
-</table>
-  
+<div *ngIf="!isLoading">  
+  <table class="table">
+    <thead class="table-borderless">
+      <th> Export status</th>
+    </thead>
+    <tbody class="table-bordered">
+      <tr class="pl-2">
+        <td>Status</td>
+        <td *ngIf="export_data.status !== 'IN_PROGRESS'">
+          {{export_data.status}}
+        </td>
+        <td *ngIf="export_data.status === 'IN_PROGRESS'">
+          <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </td>
+      </tr>
+      <tr class="pl-2" *ngIf='export_data.updated_at'>
+        <td>Last synced at</td>
+        <td>{{export_data.updated_at | date:'medium'}}</td>
+      </tr>
+      <tr class="pl-2">
+        <td>Total orgs</td>
+        <td>{{export_data.total_orgs}}</td>
+      </tr>
+      <tr class="pl-2">
+        <td>Total rows</td>
+        <td>{{export_data.total_rows}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-default btn-danger-color ml-3" (click)= "exportSheet()" [disabled]="export_data.status === 'IN_PROGRESS'">Sync</button>
+  <a *ngIf='export_data.google_sheets_link' class="btn btn-default ml-3" href="{{googleSheetsLink}}{{export_data.google_sheets_link}}" target="_blank" role="button">Open in google sheets</a>
+  <hr>
+  <table class="table">
+    <thead class="table-borderless">
+      <th> Google data studio resources</th>
+    </thead>
+    <tbody class="table-bordered">
+      <tr class="pl-2">
+        <td>Google data studio report template</td>
+        <td><a class="btn" href="{{reportLink}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-loader *ngIf="isLoading"></app-loader>
   

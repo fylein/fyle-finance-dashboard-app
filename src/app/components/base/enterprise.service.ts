@@ -17,11 +17,11 @@ export class EnterpriseService {
     return this.generalService.get(`/enterprises/${enterprise_id}/orgs/`, {});
   }
 
-  getExportLogs(enterprise_id): Observable<any> {
+  getExport(enterprise_id): Observable<any> {
     return this.generalService.get(`/enterprises/${enterprise_id}/exports/`, {});
   }
 
-  postExportLogs(enterprise_id) {
-    return this.generalService.post(`/enterprises/${enterprise_id}/exports/`, {});
+  postTriggerExport(enterprise_id) {
+    return this.generalService.post(`/enterprises/${enterprise_id}/exports/trigger/`, {});
   }
 }

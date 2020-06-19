@@ -2,16 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { EnterpriseService } from '../enterprise.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { interval, from } from 'rxjs';
+import { switchMap, takeWhile } from 'rxjs/operators';
 
-const GSHEET_LINK = environment.gsheet_link;
+const GOOGLE_SHEETS_LINK = environment.google_sheets_link;
 const REPORT_LINK = environment.report_link;
 const HELP_LINK = environment.help_link;
-const DEFAULT_SYNC_NOW = "Sync now";
-const DEFAULT_SYNC_PROGRESS = "In progress";
-const DEFAULT_SYNC_EXPORT = "Export";
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "June",
-"July", "Aug", "Sept", "Oct", "Nov", "Dec"
-];
+
 @Component({
   selector: 'app-exports',
   templateUrl: './exports.component.html',
@@ -19,81 +16,64 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "June",
 })
 export class ExportsComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
-  logs: any = {};
+  export_data: any = {};
   isLoading: boolean = true;
-  gsheetLink = GSHEET_LINK;
+  googleSheetsLink = GOOGLE_SHEETS_LINK;
   reportLink = REPORT_LINK;
   helpLink = HELP_LINK;
-  isSyncing: boolean = false;
-  disableStatus: boolean = true;
 
   constructor(private enterpriseService: EnterpriseService, private router: Router) {
   }
 
-  ngOnInit() {
-    this.getExportSheet();
-  }
-
-  formatDate(date) {
-    var newDate = new Date(date);
-    var month = MONTHS[newDate.getMonth()];
-    var day: any = newDate.getDate();
-    var year = newDate.getFullYear();
-    var hours: any = newDate.getHours();
-    var minutes: any = newDate.getMinutes();
-
-    if (day/10 < 1) {
-      day = `0${day}`
-    }
-    if (hours/10 < 1) {
-      hours = `0${hours}`
-    }
-    if (minutes/10 < 1) {
-      minutes= `0${minutes}`
-    }
-
-    return `${month} ${day}, ${year} ${hours}:${minutes}`;
+  exportSheet() {
+    this.export_data.status = 'IN_PROGRESS';
+    this.enterpriseService.postTriggerExport(this.user.enterprise.id).subscribe(logs => {
+      this.getExportSheet();
+    },
+    error => {
+      this.getExportSheet();
+    });
   }
 
   getExportSheet() {
-    this.enterpriseService.getExportLogs(this.user.enterprise.id).subscribe(logs => {
-      this.isLoading = false;
-      this.isSyncing = false;
-      this.logs = logs;
-      this.disableStatus = false;
-      this.logs.action = DEFAULT_SYNC_NOW;
-      if (this.logs.status == DEFAULT_SYNC_PROGRESS) {
-        this.isSyncing = true;
-        this.disableStatus = true;
-        this.logs.action = "Syncing";
-      }
+    interval(7000).pipe(
+      switchMap(() => from(this.enterpriseService.getExport(this.user.enterprise.id))),
+      takeWhile((export_data) => export_data.status === 'IN_PROGRESS', true)
+    ).subscribe(export_data => {
+      this.export_data = export_data;
     },
     error => {
       if (error.status==403) {
         this.router.navigate(['/enterprise/connections/']);
       }
-      this.logs = {
-        updated_at: "",
-        status : "Not created yet",
-        action : DEFAULT_SYNC_EXPORT,
+      this.export_data = {
+        updated_at: '',
+        status : 'Not created yet',
         total_rows: 0,
-        gsheet_link: null,
+        google_sheets_link: null,
         total_orgs: 0,
       }
-    }
-    )
-  }
-  exportSheet() {
-    this.logs.status = DEFAULT_SYNC_PROGRESS;
-    this.isSyncing = true;
-    this.disableStatus =true;
-    this.logs.action = "Syncing";
-    var result = this.enterpriseService.postExportLogs(this.user.enterprise.id).subscribe(logs => {
-      this.getExportSheet();
-    },
-    error => {
-      this.getExportSheet();
-    })
+    });
   }
 
+  ngOnInit() {
+    this.isLoading = true;
+    this.enterpriseService.getExport(this.user.enterprise.id).subscribe(export_data => {
+      this.export_data = export_data;
+      this.isLoading = false;
+    },
+    error => {
+      if (error.status==403) {
+        this.router.navigate(['/enterprise/connections/']);
+      }
+      this.isLoading = false;
+      this.export_data = {
+        updated_at: '',
+        status : 'Not created yet',
+        total_rows: 0,
+        google_sheets_link: null,
+        total_orgs: 0,
+      }
+    });
+  }
 }

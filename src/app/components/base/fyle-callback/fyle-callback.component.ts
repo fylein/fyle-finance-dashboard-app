@@ -16,7 +16,7 @@ export class FyleCallbackComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       let enterpriseId: number = params.state;
       let code: string = params.code;
-      this.generalService.post(`/enterprises/${enterpriseId}/connect_fyle/authorization_code/`, {
+      this.generalService.post(`/enterprises/${enterpriseId}/fyle/connect_fyle/authorization_code/`, {
         code: code
       }).subscribe(response => {
         this.router.navigate(['/enterprise/connections/']);
