@@ -7,5 +7,5 @@ export const environment = {
   app_url: '{{APP_URL}}',
   google_sheets_link: '{{GOOGLE_SHEETS_LINK}}',
   report_link: '{{GOOGLE_DATA_STUDIO_TEMPLATE}}',
-  help_link: '#'
+  help_link: '{{HELP_ARTICLE_LINK}}'
 };

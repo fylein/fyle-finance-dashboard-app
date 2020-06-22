@@ -15,6 +15,7 @@ do
     sed -i $SED_EXTRA_ARGS "s?{{FYLE_URL}}?${FYLE_URL}?g" $f;
     sed -i $SED_EXTRA_ARGS "s?{{GOOGLE_SHEETS_LINK}}?${GOOGLE_SHEETS_LINK}?g" $f;
     sed -i $SED_EXTRA_ARGS "s?{{GOOGLE_DATA_STUDIO_TEMPLATE}}?${GOOGLE_DATA_STUDIO_TEMPLATE}?g" $f;
+    sed -i $SED_EXTRA_ARGS "s?{{HELP_ARTICLE_LINK}}?${HELP_ARTICLE_LINK}?g" $f;
 done
 
 nginx -g "daemon off;"
