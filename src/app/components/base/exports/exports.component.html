@@ -5,6 +5,18 @@
     </thead>
     <tbody class="table-bordered">
       <tr class="pl-2">
+        <td>No. of Accounts</td>
+        <td>{{export_data.total_orgs}}</td>
+      </tr>
+      <tr class="pl-2">
+        <td>No. of Expenses</td>
+        <td>{{export_data.total_rows}}</td>
+      </tr>
+      <tr class="pl-2" *ngIf='export_data.updated_at'>
+        <td>Last synced at</td>
+        <td>{{export_data.updated_at | date:'medium'}}</td>
+      </tr>
+      <tr class="pl-2">
         <td>Status</td>
         <td *ngIf="export_data.status !== 'IN_PROGRESS'">
           {{export_data.status}}
@@ -15,30 +27,18 @@
           </div>
         </td>
       </tr>
-      <tr class="pl-2" *ngIf='export_data.updated_at'>
-        <td>Last synced at</td>
-        <td>{{export_data.updated_at | date:'medium'}}</td>
-      </tr>
-      <tr class="pl-2">
-        <td>Total orgs</td>
-        <td>{{export_data.total_orgs}}</td>
-      </tr>
-      <tr class="pl-2">
-        <td>Total rows</td>
-        <td>{{export_data.total_rows}}</td>
-      </tr>
     </tbody>
   </table>
   <button type="button" class="btn btn-default btn-danger-color ml-3" (click)= "exportSheet()" [disabled]="export_data.status === 'IN_PROGRESS'">Sync</button>
-  <a *ngIf='export_data.google_sheets_link' class="btn btn-default ml-3" href="{{googleSheetsLink}}{{export_data.google_sheets_link}}" target="_blank" role="button">Open in google sheets</a>
+  <a *ngIf='export_data.google_sheets_link' class="btn btn-default ml-3" href="{{googleSheetsLink}}{{export_data.google_sheets_link}}" target="_blank" role="button">Open in Google Sheets</a>
   <hr>
   <table class="table">
     <thead class="table-borderless">
-      <th> Google data studio resources</th>
+      <th> Google Data Studio resources</th>
     </thead>
     <tbody class="table-bordered">
       <tr class="pl-2">
-        <td>Google data studio report template</td>
+        <td>Google Data Studio report template</td>
         <td><a class="btn" href="{{reportLink}}" target="_blank"><i class="material-icons">open_in_new</i></a></td>
       </tr>
       <tr class="pl-2">
