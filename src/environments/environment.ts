@@ -3,12 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-  fyle_url: 'https://accounts.staging.fyle.in',
-  fyle_client_id: 'tpaJu0szH4vnk',
-  callback_uri: 'http://localhost:4200/auth/callback',
-  api_url: 'https://api-multi-org-dashboard.fyleappz.com/api',
-  app_url: 'http://localhost:4200',
-  google_sheets_link: 'https://docs.google.com/spreadsheets/d/',
+  fyle_url: '',
+  fyle_client_id: '',
+  callback_uri: '',
+  api_url: '',
+  app_url: '',
+  google_sheets_link: '',
   report_link: '#',
   help_link: '#'
 }
